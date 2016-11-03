@@ -1,4 +1,4 @@
-Shopping list v2
+Shopping list v3
 ================
 
-https://github.com/Thinkful-Ed/node-shopping-list-v2
+https://github.com/Thinkful-Ed/node-shopping-list-v3
