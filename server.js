@@ -27,9 +27,16 @@ app.post('/items', jsonParser, (req, res) => {
       return res.status(400).send(message);
     }
   }
-  
+
   const item = storage.add({name: req.body.name, budget: req.body.budget});
   res.status(201).json(item);
+});
+
+
+app.delete('/items/:id', (req, res) => {
+  storage.deleteItem(req.params.id);
+  console.log(`Deleted shopping list item \`${req.params.ID}\``);
+  res.status(204).end();
 });
 
 app.listen(process.env.PORT || 8080, () => {
