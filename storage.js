@@ -10,6 +10,11 @@ const uuid = require('uuid');
 // Our concern in this example is with how the API layer
 // is implemented.
 
+function StorageException(message) {
+   this.message = message;
+   this.name = "StorageException";
+}
+
 const Storage = {
   add: function(name, budget) {
     const item = {
@@ -27,7 +32,13 @@ const Storage = {
     delete this.items[itemId];
   },
   updateItem: function(updatedItem) {
+    const {id} = updatedItem;
+    if (!(id in this.items)) {
+      throw StorageException(
+        `Can't update item \`${id}\` because doesn't exist.`)
+    }
     this.items[updatedItem.id] = updatedItem;
+    return updatedItem;
   }
 };
 

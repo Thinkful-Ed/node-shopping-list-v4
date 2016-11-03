@@ -6,6 +6,7 @@ const jsonParser = bodyParser.json();
 
 const {storage} = require('./storage');
 
+
 // we're going to add some items to storage
 // so there's some data to look at
 storage.add('beans', 2.5);
@@ -38,6 +39,32 @@ app.delete('/items/:id', (req, res) => {
   console.log(`Deleted shopping list item \`${req.params.ID}\``);
   res.status(204).end();
 });
+
+app.put('/items/:id', jsonParser, (req, res) => {
+  const requiredFields = ['name', 'budget', 'id'];
+  for (let i=0; i<requiredFields.length; i++) {
+    const field = requiredFields[i];
+    if (!(field in req.body)) {
+      const message = `Missing \`${field}\` in request body`
+      console.error(message);
+      return res.status(400).send(message);
+    }
+  }
+  if (req.params.id !== id) {
+    const message = (
+      `Request path id (${req.params.id}) and request body id `
+      `(${req.body.id}) must match`);
+    console.error(message);
+    return res.status(400).send(message);
+  }
+  const updatedItem = storage.updateItem({
+    id: req.params.id,
+    name: req.body.name,
+    budget: req.body.budget
+  });
+  res.status(204).json(updatedItem);
+})
+
 
 app.listen(process.env.PORT || 8080, () => {
   console.log(`Your app is listening on port ${process.env.PORT || 8080}`);
