@@ -70,12 +70,12 @@ app.put('/shopping-list/:id', jsonParser, (req, res) => {
     return res.status(400).send(message);
   }
   console.log(`Updating shopping list item \`${req.params.id}\``);
-  const updatedItem = ShoppingList.update({
+  ShoppingList.update({
     id: req.params.id,
     name: req.body.name,
     budget: req.body.budget
   });
-  res.status(204).json(updatedItem);
+  res.status(204);
 });
 
 // when DELETE request comes in with an id in path,
