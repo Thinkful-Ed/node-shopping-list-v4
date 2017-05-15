@@ -70,12 +70,7 @@ app.put('/shopping-list/:id', jsonParser, (req, res) => {
     return res.status(400).send(message);
   }
   console.log(`Updating shopping list item \`${req.params.id}\``);
-  const updatedItem = ShoppingList.update({
-    id: req.params.id,
-    name: req.body.name,
-    budget: req.body.budget
-  });
-  res.status(204).json(updatedItem);
+  res.status(204);
 });
 
 // when DELETE request comes in with an id in path,
@@ -129,12 +124,7 @@ app.put('/recipes/:id', jsonParser, (req, res) => {
     return res.status(400).send(message);
   }
   console.log(`Updating shopping list item \`${req.params.id}\``);
-  const updatedItem = Recipes.update({
-    id: req.params.id,
-    name: req.body.name,
-    ingredients: req.body.ingredients
-  });
-  res.status(204).json(updatedItem);
+  res.status(204);
 });
 
 // Delete recipes (by id)!
