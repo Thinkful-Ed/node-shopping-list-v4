@@ -75,7 +75,7 @@ app.put('/shopping-list/:id', jsonParser, (req, res) => {
     name: req.body.name,
     budget: req.body.budget
   });
-  res.status(204);
+  res.status(204).end();
 });
 
 // when DELETE request comes in with an id in path,
